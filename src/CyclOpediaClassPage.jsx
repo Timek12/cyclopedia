@@ -9,6 +9,8 @@ export default class CycloPediaPage extends React.Component {
       studentList: [],
       studentCount: 0,
       hideInstructor: false,
+      inputName: "",
+      inputFeedback: "",
     };
   }
 
@@ -37,19 +39,19 @@ export default class CycloPediaPage extends React.Component {
 
   handleAddStudent = () => {
     this.setState((preiousState) => {
-        return {
-            studentCount: preiousState.studentCount + 1,
-        }
-    })
-  }
+      return {
+        studentCount: preiousState.studentCount + 1,
+      };
+    });
+  };
 
   handleRemoveAllStudents = () => {
     this.setState((preiousState) => {
-        return {
-            studentCount: 0,
-        }
-    })
-  }
+      return {
+        studentCount: 0,
+      };
+    });
+  };
 
   render() {
     console.log("render component");
@@ -66,11 +68,38 @@ export default class CycloPediaPage extends React.Component {
           </div>
         )}
         <div className="p-3">
+          <span className="h4 text-success">Feedback</span>
+          <br />
+          <input
+            type="text"
+            placeholder="Name..."
+            value={this.state.inputName}
+            onChange={(e) => {this.setState({inputName: e.target.value})}}
+          ></input>
+          <br />
+          <textarea
+            placeholder="Feedback..."
+            value={this.state.inputFeedback}
+            onChange={(e) => {this.setState({inputFeedback: e.target.value})}}
+
+          ></textarea>
+        </div>
+        <div className="p-3">
           <span className="h4 text-success">Students</span> <br />
           <div>Student Count : {this.state.studentCount} </div>
-          <button className="btn btn-success btn-sm" onClick={this.handleAddStudent}>Add Student</button>
+          <button
+            className="btn btn-success btn-sm"
+            onClick={this.handleAddStudent}
+          >
+            Add Student
+          </button>
           &nbsp;
-          <button className="btn btn-danger btn-sm" onClick={this.handleRemoveAllStudents}>Remove All Students</button>
+          <button
+            className="btn btn-danger btn-sm"
+            onClick={this.handleRemoveAllStudents}
+          >
+            Remove All Students
+          </button>
         </div>
       </div>
     );
