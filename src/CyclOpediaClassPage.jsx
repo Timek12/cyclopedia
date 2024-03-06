@@ -34,10 +34,28 @@ export default class CycloPediaPage extends React.Component {
     }
   };
 
-  componentDidUpdate() {
+  componentDidUpdate = async (previousProps, previousState) => {
     console.log("component did update");
     localStorage.setItem("cyclopediaState", JSON.stringify(this.state));
-  }
+
+    if (previousState.studentCount < this.state.studentCount) {
+      const response = await getRandomUser();
+      this.setState((prevState) => {
+        return {
+          studentList: [
+            ...prevState.studentList,
+            { name: response.data.first_name + " " + response.data.last_name },
+          ],
+        };
+      });
+    } else if (previousState.studentCount > this.state.studentCount) {
+      this.setState((prevState) => {
+        return {
+          studentList: [],
+        };
+      });
+    }
+  };
 
   componentWillUnmount() {
     console.log("component will unmount");
@@ -63,9 +81,9 @@ export default class CycloPediaPage extends React.Component {
     this.setState((previousState) => {
       return {
         hideInstructor: !previousState.hideInstructor,
-      }
-    })
-  }
+      };
+    });
+  };
 
   render() {
     console.log("render component");
@@ -73,8 +91,12 @@ export default class CycloPediaPage extends React.Component {
       <div>
         <div className="p-3">
           <span className="h4 text-success">Instructor</span>
-          <i className={`bi bi-toggle-${this.state.hideInstructor ? "off" : "on"} btn btn-success btn-sm`}
-          onClick={this.handleToggleInstructor}></i>
+          <i
+            className={`bi bi-toggle-${
+              this.state.hideInstructor ? "off" : "on"
+            } btn btn-success btn-sm`}
+            onClick={this.handleToggleInstructor}
+          ></i>
           {!this.state.hideInstructor ? (
             <Instructor instructor={this.state.instructor} />
           ) : null}
@@ -115,6 +137,13 @@ export default class CycloPediaPage extends React.Component {
           >
             Remove All Students
           </button>
+          {this.state.studentList.map((student, index) => {
+            return (
+              <div className="text-white" key={index}>
+                - {student.name}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
