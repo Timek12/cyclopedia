@@ -44,26 +44,41 @@ export default class CycloPediaPage extends React.Component {
   }
 
   handleAddStudent = () => {
-    this.setState((preiousState) => {
+    this.setState((previousState) => {
       return {
-        studentCount: preiousState.studentCount + 1,
+        studentCount: previousState.studentCount + 1,
       };
     });
   };
 
   handleRemoveAllStudents = () => {
-    this.setState((preiousState) => {
+    this.setState((previousState) => {
       return {
         studentCount: 0,
       };
     });
   };
 
+  handleToggleInstructor = () => {
+    this.setState((previousState) => {
+      return {
+        hideInstructor: !previousState.hideInstructor,
+      }
+    })
+  }
+
   render() {
     console.log("render component");
     return (
       <div>
-        {this.state.instructor != undefined && <Instructor instructor={this.state.instructor} />}
+        <div className="p-3">
+          <span className="h4 text-success">Instructor</span>
+          <i className={`bi bi-toggle-${this.state.hideInstructor ? "off" : "on"} btn btn-success btn-sm`}
+          onClick={this.handleToggleInstructor}></i>
+          {!this.state.hideInstructor ? (
+            <Instructor instructor={this.state.instructor} />
+          ) : null}
+        </div>
         <div className="p-3">
           <span className="h4 text-success">Feedback</span>
           <br />
