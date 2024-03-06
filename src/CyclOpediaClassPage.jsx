@@ -35,6 +35,22 @@ export default class CycloPediaPage extends React.Component {
     console.log("component will unmount");
   }
 
+  handleAddStudent = () => {
+    this.setState((preiousState) => {
+        return {
+            studentCount: preiousState.studentCount + 1,
+        }
+    })
+  }
+
+  handleRemoveAllStudents = () => {
+    this.setState((preiousState) => {
+        return {
+            studentCount: 0,
+        }
+    })
+  }
+
   render() {
     console.log("render component");
     return (
@@ -49,6 +65,13 @@ export default class CycloPediaPage extends React.Component {
             Phone: {this.state.instructor.phone} <br />
           </div>
         )}
+        <div className="p-3">
+          <span className="h4 text-success">Students</span> <br />
+          <div>Student Count : {this.state.studentCount} </div>
+          <button className="btn btn-success btn-sm" onClick={this.handleAddStudent}>Add Student</button>
+          &nbsp;
+          <button className="btn btn-danger btn-sm" onClick={this.handleRemoveAllStudents}>Remove All Students</button>
+        </div>
       </div>
     );
   }
