@@ -4,7 +4,7 @@ import { getRandomUser } from "./Utility/api";
 export default class CycloPediaPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = JSON.parse(localStorage.getItem("cyclopediaState")) || {
       instructor: undefined,
       studentList: [],
       studentCount: 0,
@@ -16,21 +16,26 @@ export default class CycloPediaPage extends React.Component {
 
   componentDidMount = async () => {
     console.log("component did mount");
-    const response = await getRandomUser();
-    console.log(response);
-    this.setState((previousState) => {
-      return {
-        instructor: {
-          name: response.data.first_name + " " + response.data.last_name,
-          email: response.data.email,
-          phone: response.data.phone_number,
-        },
-      };
-    });
+    if (JSON.parse(localStorage.getItem("cyclopediaState"))) {
+      this.setState(JSON.parse(localStorage.getItem("cyclopediaState")));
+    } else {
+      const response = await getRandomUser();
+      console.log(response);
+      this.setState((previousState) => {
+        return {
+          instructor: {
+            name: response.data.first_name + " " + response.data.last_name,
+            email: response.data.email,
+            phone: response.data.phone_number,
+          },
+        };
+      });
+    }
   };
 
   componentDidUpdate() {
     console.log("component did update");
+    localStorage.setItem("cyclopediaState", JSON.stringify(this.state));
   }
 
   componentWillUnmount() {
@@ -74,14 +79,17 @@ export default class CycloPediaPage extends React.Component {
             type="text"
             placeholder="Name..."
             value={this.state.inputName}
-            onChange={(e) => {this.setState({inputName: e.target.value})}}
+            onChange={(e) => {
+              this.setState({ inputName: e.target.value });
+            }}
           ></input>
           <br />
           <textarea
             placeholder="Feedback..."
             value={this.state.inputFeedback}
-            onChange={(e) => {this.setState({inputFeedback: e.target.value})}}
-
+            onChange={(e) => {
+              this.setState({ inputFeedback: e.target.value });
+            }}
           ></textarea>
         </div>
         <div className="p-3">
