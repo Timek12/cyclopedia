@@ -1,8 +1,8 @@
 import React from "react";
 import { getRandomUser } from "./Utility/api";
-import Instructor from "./Instructor";
+import InstructorFunc from "./InstructorFunc";
 
-export default class CycloPediaClassPage extends React.Component {
+export default class CycloFuncPediaPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = JSON.parse(localStorage.getItem("cyclopediaState")) || {
@@ -98,7 +98,7 @@ export default class CycloPediaClassPage extends React.Component {
             onClick={this.handleToggleInstructor}
           ></i>
           {!this.state.hideInstructor  && this.state.instructor ? (
-            <Instructor instructor={this.state.instructor} />
+            <InstructorFunc instructor={this.state.instructor} />
           ) : null}
         </div>
         <div className="p-3">
