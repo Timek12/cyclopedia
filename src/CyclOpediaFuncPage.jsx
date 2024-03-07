@@ -63,8 +63,10 @@ const CycloFuncPediaPage = () => {
       });
     };
 
-    getUser();
-  }, []);
+    if(!state.hideInstructor){
+      getUser();
+    }
+  }, [state.hideInstructor]);
 
 
 
