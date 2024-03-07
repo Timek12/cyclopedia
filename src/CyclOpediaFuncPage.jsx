@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getRandomUser } from "./Utility/api";
 import InstructorFunc from "./InstructorFunc";
 
@@ -17,6 +17,13 @@ const CycloFuncPediaPage = () => {
   });
   const [inputFeedback, setInputFeedback] = useState(() => {
     return "";
+  });
+
+  const totalRender = useRef(0);
+
+  useEffect(() => {
+    totalRender.current = totalRender.current + 1;
+    console.log("render: " + totalRender.current);
   });
 
   useEffect(() => {
@@ -103,6 +110,7 @@ const CycloFuncPediaPage = () => {
           <InstructorFunc instructor={state.instructor} />
         ) : null}
       </div>
+      <div className="p-3">Total Render: {totalRender.current}</div>
       <div className="p-3">
         <span className="h4 text-success">Feedback</span>
         <br />
