@@ -21,11 +21,16 @@ const CycloFuncPediaPage = () => {
 
   const totalRender = useRef(0);
   const previousStudentCount = useRef(0);
+  const feedbackInputRef = useRef(null);
 
   useEffect(() => {
     totalRender.current = totalRender.current + 1;
     console.log("render: " + totalRender.current);
   });
+
+  useEffect(() => {
+    feedbackInputRef.current.focus();
+  }, []);
 
   useEffect(() => {
     const getUser = async () => {
@@ -132,6 +137,7 @@ const CycloFuncPediaPage = () => {
         <textarea
           placeholder="Feedback..."
           value={inputFeedback}
+          ref={feedbackInputRef}
           onChange={(e) => {
             setInputFeedback(e.target.value);
           }}
