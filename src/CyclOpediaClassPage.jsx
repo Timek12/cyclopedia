@@ -16,12 +16,10 @@ export default class CycloPediaClassPage extends React.Component {
   }
 
   componentDidMount = async () => {
-    console.log("component did mount");
     if (JSON.parse(localStorage.getItem("cyclopediaState"))) {
       this.setState(JSON.parse(localStorage.getItem("cyclopediaState")));
     } else {
       const response = await getRandomUser();
-      console.log(response);
       this.setState((previousState) => {
         return {
           instructor: {
@@ -35,7 +33,6 @@ export default class CycloPediaClassPage extends React.Component {
   };
 
   componentDidUpdate = async (previousProps, previousState) => {
-    console.log("component did update");
     localStorage.setItem("cyclopediaState", JSON.stringify(this.state));
 
     if (previousState.studentCount < this.state.studentCount) {
@@ -57,9 +54,7 @@ export default class CycloPediaClassPage extends React.Component {
     }
   };
 
-  componentWillUnmount() {
-    console.log("component will unmount");
-  }
+
 
   handleAddStudent = () => {
     this.setState((previousState) => {
@@ -86,7 +81,6 @@ export default class CycloPediaClassPage extends React.Component {
   };
 
   render() {
-    console.log("render component");
     return (
       <div>
         <div className="p-3">

@@ -5,20 +5,7 @@ class Instructor extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log("Mount - instructor");
-  }
-
-  componentDidUpdate() {
-    console.log("Update - instructor");
-  }
-
-  componentWillUnmount() {
-    console.log("Unmount - instructor");
-  }
-
   render() {
-    console.log("Render - instructor");
     return (
       <div>
         <br />

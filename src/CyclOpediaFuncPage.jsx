@@ -19,29 +19,6 @@ const CycloFuncPediaPage = () => {
     return "";
   });
 
-  // componentDidUpdate = async (previousProps, previousState) => {
-  //   console.log("component did update");
-  //   localStorage.setItem("cyclopediaState", JSON.stringify(this.state));
-
-  //   if (previousState.studentCount < this.state.studentCount) {
-  //     const response = await getRandomUser();
-  //     this.setState((prevState) => {
-  //       return {
-  //         studentList: [
-  //           ...prevState.studentList,
-  //           { name: response.data.first_name + " " + response.data.last_name },
-  //         ],
-  //       };
-  //     });
-  //   } else if (previousState.studentCount > this.state.studentCount) {
-  //     this.setState((prevState) => {
-  //       return {
-  //         studentList: [],
-  //       };
-  //     });
-  //   }
-  // };
-
   useEffect(() => {
     const getUser = async () => {
       const response = await getRandomUser();

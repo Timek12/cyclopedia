@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 
 const InstructorFunc = (props) => {
-  useEffect(() => {
-    return () => {
-      console.log("Instructor - UNMOUNTED");
-    };
-  }, []);
-
   return (
     <div>
       <br />
