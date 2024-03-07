@@ -111,7 +111,8 @@ export default class CycloPediaClassPage extends React.Component {
             onChange={(e) => {
               this.setState({ inputName: e.target.value });
             }}
-          ></input>
+          ></input>{" "}
+          Value: {this.state.inputName}
           <br />
           <textarea
             placeholder="Feedback..."
@@ -119,7 +120,8 @@ export default class CycloPediaClassPage extends React.Component {
             onChange={(e) => {
               this.setState({ inputFeedback: e.target.value });
             }}
-          ></textarea>
+          ></textarea>{" "}
+          Value: {this.state.inputFeedback}
         </div>
         <div className="p-3">
           <span className="h4 text-success">Students</span> <br />
