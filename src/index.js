@@ -14,7 +14,7 @@ root.render(
         <CycloPediaClassPage />
       </div>
       <div className="col-6">
-        <span className="h1 text-warning text-center">Class Component</span>
+        <span className="h1 text-warning text-center">Func Component</span>
         <CycloPediaFuncPage />
       </div>
     </div>
