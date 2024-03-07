@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getRandomUser } from "./Utility/api";
 import InstructorFunc from "./InstructorFunc";
 
@@ -73,9 +73,23 @@ const CycloFuncPediaPage = () => {
   //   }
   // };
 
-  // componentWillUnmount() {
-  //   console.log("component will unmount");
-  // }
+  useEffect(() => {
+    console.log("This will be called on EACH render");
+  });
+
+  useEffect(() => {
+    console.log("This will be on initial/first render/mount");
+  }, []);
+
+  useEffect(() => {
+    console.log("This will be whenever value of hideInstructor changes");
+  }, [inputFeedback]);
+
+  useEffect(() => {
+    return () => {
+      console.log("This will be called when component will be UNMOUNTED");
+    };
+  }, []);
 
   const handleAddStudent = () => {
     setState((previousState) => {
