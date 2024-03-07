@@ -43,12 +43,6 @@ const CycloFuncPediaPage = () => {
   // };
 
   useEffect(() => {
-    console.log("This will be called on EACH render");
-  });
-
-  useEffect(() => {
-    console.log("This will be on initial/first render/mount");
-
     const getUser = async () => {
       const response = await getRandomUser();
       setState((prevState) => {
@@ -63,22 +57,33 @@ const CycloFuncPediaPage = () => {
       });
     };
 
-    if(!state.hideInstructor){
+    if (!state.hideInstructor) {
       getUser();
     }
   }, [state.hideInstructor]);
 
-
-
   useEffect(() => {
-    console.log("This will be whenever value of hideInstructor changes");
-  }, [inputFeedback]);
-
-  useEffect(() => {
-    return () => {
-      console.log("This will be called when component will be UNMOUNTED");
+    const getUser = async () => {
+      const response = await getRandomUser();
+      setState((previousState) => {
+        return {
+          ...previousState,
+          studentList: [
+            ...previousState.studentList,
+            { name: response.data.first_name + " " + response.data.last_name },
+          ],
+        };
+      });
     };
-  }, []);
+
+    if (state.studentList.length < state.studentCount) {
+      getUser();
+    } else if (state.studentList.length > state.studentCount) {
+      setState((previousState) => {
+        return { ...previousState, studentList: [] };
+      });
+    }
+  }, [state.studentCount]);
 
   const handleAddStudent = () => {
     setState((previousState) => {
