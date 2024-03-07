@@ -20,6 +20,7 @@ const CycloFuncPediaPage = () => {
   });
 
   const totalRender = useRef(0);
+  const previousStudentCount = useRef(0);
 
   useEffect(() => {
     totalRender.current = totalRender.current + 1;
@@ -60,13 +61,17 @@ const CycloFuncPediaPage = () => {
       });
     };
 
-    if (state.studentList.length < state.studentCount) {
+    if (previousStudentCount.current < state.studentCount) {
       getUser();
-    } else if (state.studentList.length > state.studentCount) {
+    } else if (previousStudentCount.current > state.studentCount) {
       setState((previousState) => {
         return { ...previousState, studentList: [] };
       });
     }
+  }, [state.studentCount]);
+
+  useEffect(() => {
+    previousStudentCount.current = state.studentCount;
   }, [state.studentCount]);
 
   const handleAddStudent = () => {
