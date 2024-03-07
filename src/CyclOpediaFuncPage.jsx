@@ -79,7 +79,25 @@ const CycloFuncPediaPage = () => {
 
   useEffect(() => {
     console.log("This will be on initial/first render/mount");
+
+    const getUser = async () => {
+      const response = await getRandomUser();
+      setState((prevState) => {
+        return {
+          ...prevState,
+          instructor: {
+            name: response.data.first_name + " " + response.data.last_name,
+            email: response.data.email,
+            phone: response.data.phone_number,
+          },
+        };
+      });
+    };
+
+    getUser();
   }, []);
+
+
 
   useEffect(() => {
     console.log("This will be whenever value of hideInstructor changes");
